@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:weater_app/models/weather_model.dart';
+import 'package:weater_app/services/get_weather_dio.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -16,14 +19,23 @@ class SearchView extends StatelessWidget {
               hintText: "Enter City Name",
               labelText: "Search",
               suffixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
+              focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.green, width: 2),
               ),
-              contentPadding: EdgeInsets.all(50),
+              contentPadding: EdgeInsets.all(20),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red, width: 2),
               ),
             ),
+
+            onFieldSubmitted: (val) async {
+              print("val submitted $val");
+              WeatherModel? xx = await WeatherDioRequest(
+                Dio(),
+              ).getCityWeather(val);
+              print("from search");
+              print(xx?.cityName);
+            },
           ),
         ),
       ),

@@ -11,7 +11,7 @@ class NoWeatherView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed("loaded_weather");
+              Navigator.of(context).pushNamed("search");
             },
             icon: Icon(Icons.search),
           ),
