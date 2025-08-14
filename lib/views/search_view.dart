@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weater_app/cubit/get_weather_cubit.dart';
 import 'package:weater_app/models/weather_model.dart';
 import 'package:weater_app/services/get_weather_dio.dart';
 
@@ -30,11 +32,8 @@ class SearchView extends StatelessWidget {
 
             onFieldSubmitted: (val) async {
               print("val submitted $val");
-              WeatherModel? xx = await WeatherDioRequest(
-                Dio(),
-              ).getCityWeather(val);
-              print("from search");
-              print(xx?.cityName);
+              await BlocProvider.of<GetWeatherCubit>(context).getWeather(val);
+              Navigator.of(context).pop();
             },
           ),
         ),

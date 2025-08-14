@@ -12,9 +12,9 @@ class WeatherModel {
   factory WeatherModel.fromJson(Map<String, dynamic> data) {
     return WeatherModel(
       cityName: data['location']['name'],
-      date: DateTime.parse(data['current']['last_updated']),
-      image: data['current']['condition']['icon'],
-      condition: data['current']['condition']['text'],
+      date: DateTime.parse(data['location']['localtime']),
+      image: data['forecast']['forecastday'][0]['day']['condition']['icon'],
+      condition: data['forecast']['forecastday'][0]['day']['condition']['text'],
       temp: data['forecast']['forecastday'][0]['day']['avgtemp_c'],
       maxTemp: data['forecast']['forecastday'][0]['day']['maxtemp_c'],
       minTemp: data['forecast']['forecastday'][0]['day']['mintemp_c'],
